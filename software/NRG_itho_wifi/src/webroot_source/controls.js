@@ -9,8 +9,11 @@ var sensor = -1;
 sessionStorage.setItem("statustimer", 0);
 var settingIndex = -1;
 
-var websocketServerLocation = 'ws://' + window.location.hostname + ':8000/ws';
-
+if (document.location.protocol == 'https:') {
+    var websocketServerLocation = 'wss://' + window.location.hostname + ':8000/ws';
+} else {
+    var websocketServerLocation = 'ws://' + window.location.hostname + ':8000/ws';
+}
 function startWebsock(websocketServerLocation) {
   websock = new WebSocket(websocketServerLocation);
   websock.onmessage = async function (b) {
